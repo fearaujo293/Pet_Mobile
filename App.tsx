@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import PetList from './src/screens/PetList';
 import AddPet from './src/screens/AddPetScreen';
+import ConsultasScreen from './src/screens/ConsultasScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,28 +15,39 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen 
-          name="Home" 
+          name="Home"
           component={HomeScreen}
           options={{
-            title: '', // Remove o texto "Home" do topo
+            title: '',
             headerStyle: {
-              backgroundColor: '#FFF3B0', // Igual ao fundo da barra superior na HomeScreen
+              backgroundColor: '#FFF3B0',
             },
-            headerShadowVisible: false, // Remove a sombra da header (opcional)
+            headerShadowVisible: false,
           }}
         />
         <Stack.Screen 
-          name="PetList" 
+          name="PetList"
           component={PetList}
           options={{
             title: 'Meus Pets',
           }}
         />
         <Stack.Screen 
-          name="AddPet" 
+          name="AddPet"
           component={AddPet}
           options={{
             title: 'Adicionar Pet',
+          }}
+        />
+        <Stack.Screen 
+          name="Consultas"
+          component={ConsultasScreen}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: '#FFF3B0',
+            },
+            headerShadowVisible: false,
           }}
         />
       </Stack.Navigator>

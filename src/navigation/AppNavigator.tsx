@@ -1,22 +1,36 @@
-// AppNavigator.tsx
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
-import AddPetScreen from '../screens/AddPetScreen';
-import PetList from '../screens/PetList';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavoritesScreen from '../screens/FavoritesScreen';
-import PetScreen from '../screens/Petscreen'; // ou PetDetailScreen, dependendo do nome
+import HomeStackNavigator from './HomeStackNavigator';
 
-const Stack = createNativeStackNavigator();
+// Ícones para as abas
+import { Ionicons } from '@expo/vector-icons'; 
 
-export default function AppNavigator() {
+const Tab = createBottomTabNavigator();
+
+export default function AppNavigation() {
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="AddPet" component={AddPetScreen} />
-      <Stack.Screen name="PetList" component={PetList} />
-      <Stack.Screen name="Favorites" component={FavoritesScreen} />
-      <Stack.Screen name="PetScreen" component={PetScreen} />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ color, size, focused }) => {
+            let iconName: any;
+            if (route.name === 'Início') {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === 'Favoritos') {
+              iconName = focused ? 'heart' : 'heart-outline';
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: '#6A0DAD',
+          tabBarInactiveTintColor: 'gray',
+        })}
+      >
+        <Tab.Screen name="Início" component={HomeStackNavigator} /> 
+        <Tab.Screen name="Favoritos" component={FavoritesScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }

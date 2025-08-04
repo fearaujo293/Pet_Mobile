@@ -75,9 +75,9 @@ const HomeScreen = () => {
         <Text style={styles.addButtonText}>Adicionar</Text>
       </TouchableOpacity>
 
-      {/* Rodapé fixo (pode ser trocado por Tab.Navigator) */}
+      {/* Rodapé fixo com navegação */}
       <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity style={[styles.iconButton, styles.iconButtonActive]}>
           <Text style={styles.icon}>🐶</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
@@ -86,7 +86,10 @@ const HomeScreen = () => {
         <TouchableOpacity style={styles.iconButton}>
           <Text style={styles.icon}>🐾</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
+        <TouchableOpacity 
+          style={styles.iconButton}
+          onPress={() => navigation.navigate('Consultas' as never)}
+        >
           <Text style={styles.icon}>🩺</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
@@ -167,7 +170,11 @@ const styles = StyleSheet.create({
     borderTopColor: '#ccc',
   },
   iconButton: {
-    padding: 6,
+    padding: 8,
+    borderRadius: 20,
+  },
+  iconButtonActive: {
+    backgroundColor: '#9F70FD',
   },
   icon: {
     fontSize: 22,
