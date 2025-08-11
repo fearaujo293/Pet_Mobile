@@ -1,15 +1,8 @@
-// src/components/PetCard.tsx
+// src/components/PetCard.jsx
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-interface PetCardProps {
-  image: any;
-  tipo: string;
-  servico: string;
-  horario: string;
-}
-
-export const PetCard: React.FC<PetCardProps> = ({ image, tipo, servico, horario }) => {
+export const PetCard = ({ image, tipo, servico, horario }) => {
   return (
     <TouchableOpacity style={styles.card}>
       <Image source={image} style={styles.image} />
