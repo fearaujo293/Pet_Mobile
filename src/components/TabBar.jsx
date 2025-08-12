@@ -1,6 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const { width } = Dimensions.get('window');
 
 export default function TabBar() {
   const navigation = useNavigation();
@@ -11,6 +14,7 @@ export default function TabBar() {
         style={styles.tabItem} 
         onPress={() => navigation.navigate('Home')}
       >
+        <Icon name="home" size={24} color="#333" />
         <Text style={styles.tabText}>Início</Text>
       </TouchableOpacity>
       
@@ -18,6 +22,7 @@ export default function TabBar() {
         style={styles.tabItem} 
         onPress={() => navigation.navigate('PetList')}
       >
+        <Icon name="pets" size={24} color="#333" />
         <Text style={styles.tabText}>Pets</Text>
       </TouchableOpacity>
       
@@ -25,6 +30,7 @@ export default function TabBar() {
         style={styles.tabItem} 
         onPress={() => navigation.navigate('AddPet')}
       >
+        <Icon name="add-circle" size={24} color="#333" />
         <Text style={styles.tabText}>Adicionar</Text>
       </TouchableOpacity>
       
@@ -32,7 +38,24 @@ export default function TabBar() {
         style={styles.tabItem} 
         onPress={() => navigation.navigate('Favorites')}
       >
+        <Icon name="favorite" size={24} color="#333" />
         <Text style={styles.tabText}>Favoritos</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={styles.tabItem} 
+        onPress={() => navigation.navigate('Consultations')}
+      >
+        <Icon name="event" size={24} color="#333" />
+        <Text style={styles.tabText}>Consultas</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        style={styles.tabItem} 
+        onPress={() => navigation.navigate('Schedule')}
+      >
+        <Icon name="schedule" size={24} color="#333" />
+        <Text style={styles.tabText}>Agendar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -49,6 +72,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+    width: width,
   },
   tabItem: {
     flex: 1,

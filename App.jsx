@@ -6,24 +6,54 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 
+// Suas telas originais
 import HomeScreen from './src/screens/HomeScreen';
 import PetList from './src/screens/PetList';
 import AddPetScreen from './src/screens/AddPetScreen';
-import PetsScreen from './src/screens/Petscreen';
+import PetsScreen from './src/screens/Petscreen';  // Tela de detalhes do pet
 import FavoritesScreen from './src/screens/FavoritesScreen';
 import VeterinarioScreen from './src/screens/VeterinarioScreen';
 
-// Importando os ícones personalizados
+// Ícones personalizados
 import iconeHome from './src/assets/icone.png';
 import iconePet from './src/assets/pet.png';
 import iconeMao from './src/assets/mao.png';
 import iconePessoa from './src/assets/pessoa.png';
 import iconeVeterinario from './src/assets/veterinario.png';
 
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-// Componente para as telas principais com TabBar
+// Stack interno para a aba Pets (lista, adicionar, detalhes)
+function PetsStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#FFF3B0' },
+        headerTintColor: '#5B51EF',
+        headerTitleAlign: 'center',
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}
+    >
+      <Stack.Screen
+        name="PetList"
+        component={PetList}
+        options={{ title: 'Meus Pets' }}
+      />
+      <Stack.Screen
+        name="AddPet"
+        component={AddPetScreen}
+        options={{ title: 'Adicionar Pet' }}
+      />
+      <Stack.Screen
+        name="PetDetails"
+        component={PetsScreen}
+        options={{ title: 'Detalhes do Pet' }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function MainTabs() {
   return (
     <Tab.Navigator
@@ -36,94 +66,100 @@ function MainTabs() {
         },
         tabBarActiveTintColor: '#5B51EF',
         tabBarInactiveTintColor: '#333',
-        headerStyle: { backgroundColor: '#FFF3B0' },
-        tabBarShowLabel: false, // Remove os textos das abas
+        headerShown: false, // Cabeçalho está dentro das stacks quando necessário
+        tabBarShowLabel: false, // Somente ícones
       }}
     >
-      <Tab.Screen 
-        name="Home" 
-        component={HomeScreen} 
-        options={{ 
-          title: 'Início',
+      <Tab.Screen
+        name="Home"
+        component={PetsStack} // Stack com várias telas dentro da aba Pets
+        options={{
           tabBarIcon: ({ focused }) => (
-            <Image 
-              source={iconeHome} 
-              style={{ 
-                width: 24, 
-                height: 24, 
-                tintColor: focused ? '#5B51EF' : '#333'
-              }} 
+            <Image
+              source={iconeHome}
+              style={{
+                width: 24,
+                height: 24,
+                tintColor: focused ? '#5B51EF' : '#333',
+              }}
+              resizeMode="contain"
             />
           ),
-        }} 
+        }}
       />
-      <Tab.Screen 
-        name="PetList" 
-        component={PetList} 
-        options={{ 
-          title: 'Meus Pets',
+
+      <Tab.Screen
+        name="Pets"
+        component={HomeScreen}
+        options={{
           tabBarIcon: ({ focused }) => (
-            <Image 
-              source={iconePet} 
-              style={{ 
-                width: 24, 
-                height: 24, 
-                tintColor: focused ? '#5B51EF' : '#333'
-              }} 
+            <Image
+              source={iconePet}
+              style={{
+                width: 24,
+                height: 24,
+                tintColor: focused ? '#5B51EF' : '#333',
+              }}
+              resizeMode="contain"
             />
           ),
-        }} 
+        }}
       />
-      <Tab.Screen 
-        name="AddPet" 
-        component={AddPetScreen} 
-        options={{ 
-          title: 'Adicionar Pet',
+
+
+
+      <Tab.Screen
+        name="AddPet"
+        component={AddPetScreen}
+        options={{
           tabBarIcon: ({ focused }) => (
-            <Image 
-              source={iconeMao} 
-              style={{ 
-                width: 24, 
-                height: 24, 
-                tintColor: focused ? '#5B51EF' : '#333'
-              }} 
+            <Image
+              source={iconeMao}
+              style={{
+                width: 24,
+                height: 24,
+                tintColor: focused ? '#5B51EF' : '#333',
+              }}
+              resizeMode="contain"
             />
           ),
-        }} 
+        }}
       />
-      <Tab.Screen 
-        name="Favorites" 
-        component={FavoritesScreen} 
-        options={{ 
-          title: 'Favoritos',
+
+      <Tab.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{
           tabBarIcon: ({ focused }) => (
-            <Image 
-              source={iconePessoa} 
-              style={{ 
-                width: 24, 
-                height: 24, 
-                tintColor: focused ? '#5B51EF' : '#333'
-              }} 
+            <Image
+              source={iconePessoa}
+              style={{
+                width: 24,
+                height: 24,
+                tintColor: focused ? '#5B51EF' : '#333',
+              }}
+              resizeMode="contain"
             />
           ),
-        }} 
+        }}
       />
-      <Tab.Screen 
-        name="Veterinario" 
-        component={VeterinarioScreen} 
-        options={{ 
-          title: 'Veterinário',
+
+      <Tab.Screen
+        name="Veterinario"
+        component={VeterinarioScreen}
+        options={{
           tabBarIcon: ({ focused }) => (
-            <Image 
-              source={iconeVeterinario} 
-              style={{ 
-                width: 24, 
-                height: 24, 
-                tintColor: focused ? '#5B51EF' : '#333'
-              }} 
+            <Image
+              source={iconeVeterinario}
+              style={{
+                width: 24,
+                height: 24,
+                tintColor: focused ? '#5B51EF' : '#333',
+              }}
+              resizeMode="contain"
             />
           ),
-        }} 
+        }}
       />
     </Tab.Navigator>
   );
@@ -132,18 +168,10 @@ function MainTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="MainTabs" component={MainTabs} />
-        <Stack.Screen 
-          name="PetDetails" 
-          component={PetsScreen}
-          options={{ 
-            title: 'Detalhes do Pet',
-            headerShown: true,
-            headerStyle: { backgroundColor: '#FFF3B0' }
-          }} 
-        />
-      </Stack.Navigator>
+      {/* Principal é só a Tab Navigator com a stack interna para Pets */}
+      <MainTabs />
     </NavigationContainer>
   );
 }
+// App.jsx
+// Este arquivo configura a navegação principal do aplicativo, incluindo as abas e stacks necessárias.

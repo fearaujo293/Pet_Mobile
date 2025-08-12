@@ -201,46 +201,47 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   header: {
-    backgroundColor: '#FFF3B0',
-    padding: 20,
+    backgroundColor: '#FFE4B5', // Adjusted to a softer and less orange yellow
+    padding: 25,
     alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#FFDAB9', // Updated border color to match the softer yellow
   },
   title: {
-    fontSize: 24,
+    fontSize: 26, // Slightly larger font size for better readability
     fontWeight: 'bold',
     color: '#333',
+    textShadowColor: '#FFA500', // Added text shadow for a subtle effect
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   petCard: {
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 15,
+    borderRadius: 15, // Increased border radius for a softer look
+    padding: 20, // Increased padding for better spacing
     marginHorizontal: 20,
     marginTop: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 4 }, // Increased shadow for more depth
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 3,
   },
   petImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-  },
-  petInfo: {
-    marginLeft: 15,
-    justifyContent: 'center',
+    width: 70, // Slightly larger image size
+    height: 70,
+    borderRadius: 35,
   },
   petName: {
-    fontSize: 18,
+    fontSize: 20, // Larger font size for better emphasis
     fontWeight: 'bold',
     color: '#333',
   },
   petDetail: {
-    fontSize: 14,
+    fontSize: 16, // Slightly larger font size for better readability
     color: '#666',
-    marginTop: 2,
+    marginTop: 4, // Increased margin for better spacing
   },
   addButton: {
     backgroundColor: '#5B51EF',
