@@ -12,7 +12,8 @@ import PetList from './src/screens/PetList';
 import AddPetScreen from './src/screens/AddPetScreen';
 import PetsScreen from './src/screens/Petscreen';  // Tela de detalhes do pet
 import FavoritesScreen from './src/screens/FavoritesScreen';
-import VeterinarioScreen from './src/screens/VeterinarioScreen';
+import ConsultasScreen from './src/screens/VeterinarioScreen';
+import DetalhesConsultaScreen from './src/screens/DetalhesConsultaScreen';
 
 // Ícones personalizados
 import iconeHome from './src/assets/icone.png';
@@ -48,7 +49,7 @@ function PetsStack() {
       <Stack.Screen
         name="PetDetails"
         component={PetsScreen}
-        options={{ title: 'Detalhes do Pet' }}
+        options={{ title: 'Detalhes do Pet', headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -146,7 +147,6 @@ function MainTabs() {
 
       <Tab.Screen
         name="Veterinario"
-        component={VeterinarioScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -160,7 +160,29 @@ function MainTabs() {
             />
           ),
         }}
-      />
+      >
+        {() => (
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: '#FFF3B0' },
+              headerTintColor: '#5B51EF',
+              headerTitleAlign: 'center',
+              headerTitleStyle: { fontWeight: 'bold' },
+            }}
+          >
+            <Stack.Screen
+              name="Consultas"
+              component={ConsultasScreen}
+              options={{ title: 'Consultas Veterinárias' }}
+            />
+            <Stack.Screen
+              name="DetalhesConsulta"
+              component={DetalhesConsultaScreen}
+              options={{ title: 'Detalhes da Consulta' }}
+            />
+          </Stack.Navigator>
+        )}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }

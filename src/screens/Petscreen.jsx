@@ -47,30 +47,7 @@ const PetScreen = () => {
       </ScrollView>
 
       {/* Bottom Navigation Bar */}
-      <View style={styles.bottomNavigation}>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home" size={24} color="white" />
-          <Text style={styles.navText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItemActive}>
-          <View style={styles.activeIconBackground}>
-            <Ionicons name="paw" size={24} color="white" />
-          </View>
-          <Text style={styles.navTextActive}>Pets</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="calendar" size={24} color="white" />
-          <Text style={styles.navText}>Consultas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="person" size={24} color="white" />
-          <Text style={styles.navText}>Perfil</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="settings" size={24} color="white" />
-          <Text style={styles.navText}>Configurações</Text>
-        </TouchableOpacity>
-      </View>
+      
     </View>
   );
 };
@@ -140,42 +117,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
-  },
-  bottomNavigation: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    paddingVertical: 10,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    borderTopWidth: 1,
-    borderTopColor: '#333',
-  },
-  navItem: {
-    alignItems: 'center',
-    padding: 5,
-  },
-  navItemActive: {
-    alignItems: 'center',
-    padding: 5,
-  },
-  activeIconBackground: {
-    backgroundColor: '#8A2BE2', // Purple color
-    borderRadius: 25,
-    padding: 10,
-    marginBottom: 5,
-  },
-  navText: {
-    color: 'white',
-    fontSize: 12,
-  },
-  navTextActive: {
-    color: 'white',
-    fontSize: 12,
     fontWeight: 'bold',
   },
 });

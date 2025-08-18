@@ -1,97 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  TextInput,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
-const VeterinarioScreen = () => {
+const ConsultasScreen = ({ navigation }) => {
+  const [activeTab, setActiveTab] = useState('Agendada');
+
+  const renderContent = () => {
+    const Card = ({ petName, service, time, imageSource, status }) => (
+      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('DetalhesConsulta')}>
+        <Image source={imageSource} style={styles.petImage} />
+        <View style={styles.cardInfo}>
+          <Text style={styles.petName}>{petName}</Text>
+          <Text style={styles.service}>{service}</Text>
+          <Text style={styles.time}>{time}</Text>
+        </View>
+        <View style={[styles.statusBadgeCard, styles[`status${status}`]]}>
+          <Text style={styles.statusTextCard}>{status}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+
+    switch (activeTab) {
+      case 'Agendada':
+        return (
+          <>
+            <Card petName="Mascote 1" service="Consulta Geral" time="10:00 AM" imageSource={require('../assets/cat1.png')} status="Agendada" />
+            <Card petName="Mascote 2" service="Vacinação" time="02:30 PM" imageSource={require('../assets/dog1.png')} status="Agendada" />
+          </>
+        );
+      case 'Andamento':
+        return (
+          <>
+            <Card petName="Mascote 3" service="Exame de Sangue" time="09:00 AM" imageSource={require('../assets/dog2.png')} status="Andamento" />
+          </>
+        );
+      case 'Concluídas':
+        return (
+          <>
+            <Card petName="Mascote 4" service="Tosa" time="04:00 PM" imageSource={require('../assets/cat1.png')} status="Concluída" />
+            <Card petName="Mascote 5" service="Banho" time="01:00 PM" imageSource={require('../assets/dog1.png')} status="Concluída" />
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Profile Photo */}
-        <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: 'https://via.placeholder.com/150' }} // Replace with actual profile image
-            style={styles.profileImage}
-          />
-        </View>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerTitle}>Consultas</Text>
+      </View>
 
-        {/* User Info */}
-        <Text style={styles.userName}>Nome do Usuário</Text>
-        <Text style={styles.userRole}>Tutor</Text>
-
-        {/* Input Fields */}
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Nome Completo</Text>
-          <TextInput style={styles.inputField} placeholder="Nome Completo" />
-
-          <Text style={styles.label}>Telefone</Text>
-          <TextInput
-            style={styles.inputField}
-            placeholder="(00) 00000-0000"
-            keyboardType="phone-pad"
-          />
-
-          <Text style={styles.label}>E-mail</Text>
-          <TextInput
-            style={styles.inputField}
-            placeholder="seuemail@example.com"
-            keyboardType="email-address"
-          />
-
-          <Text style={styles.label}>Endereço</Text>
-          <TextInput
-            style={[styles.inputField, styles.multilineInput]}
-            placeholder="Seu Endereço"
-            multiline
-          />
-        </View>
-
-        {/* Action Buttons */}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.button, styles.editButton]}>
-            <Text style={styles.buttonText}>Editar Perfil</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.passwordButton]}>
-            <Text style={styles.buttonText}>Alterar Senha</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.logoutButton]}>
-            <Text style={styles.buttonText}>Sair</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      {/* Bottom Navigation Bar */}
-      <View style={styles.bottomNavigation}>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="home" size={24} color="white" />
-          <Text style={styles.navText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="paw" size={24} color="white" />
-          <Text style={styles.navText}>Pets</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="calendar" size={24} color="white" />
-          <Text style={styles.navText}>Consultas</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItemActive}>
-          <View style={styles.activeIconBackground}>
-            <Ionicons name="person" size={24} color="white" />
+      <View style={styles.tabContainer}>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'Agendada' && styles.activeTab]}
+          onPress={() => setActiveTab('Agendada')}
+        >
+          <Text style={[styles.tabText, activeTab === 'Agendada' && styles.activeTabText]}>Agendada</Text>
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>1</Text>
           </View>
-          <Text style={styles.navTextActive}>Perfil</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="settings" size={24} color="white" />
-          <Text style={styles.navText}>Configurações</Text>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'Andamento' && styles.activeTab]}
+          onPress={() => setActiveTab('Andamento')}
+        >
+          <Text style={[styles.tabText, activeTab === 'Andamento' && styles.activeTabText]}>Andamento</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tab, activeTab === 'Concluídas' && styles.activeTab]}
+          onPress={() => setActiveTab('Concluídas')}
+        >
+          <Text style={[styles.tabText, activeTab === 'Concluídas' && styles.activeTabText]}>Concluídas</Text>
         </TouchableOpacity>
       </View>
+
+      <ScrollView style={styles.contentContainer}>{renderContent()}</ScrollView>
+
+      <TouchableOpacity style={styles.scheduleButton} onPress={() => navigation.navigate('DetalhesConsulta')}>
+        <Text style={styles.scheduleButtonText}>Agendar Consulta</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -99,117 +94,138 @@ const VeterinarioScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF6D5',
+    backgroundColor: '#FFFBEA',
+    paddingHorizontal: 16,
   },
-  scrollContent: {
-    padding: 20,
-    paddingBottom: 120, // Ensure content is not hidden by bottom navigation
-  },
-  imageContainer: {
+  headerContainer: {
+    width: '100%',
+    paddingTop: 16,
+    paddingBottom: 12,
     alignItems: 'center',
-    marginVertical: 20,
   },
-  profileImage: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    borderWidth: 3,
-    borderColor: 'white',
-  },
-  userName: {
+  headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333',
+    color: '#000000',
   },
-  userRole: {
-    fontSize: 14,
-    color: '#888',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  inputGroup: {
-    marginBottom: 10,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 5,
-    color: '#333',
-  },
-  inputField: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  multilineInput: {
-    height: 100,
-    textAlignVertical: 'top',
-  },
-  buttonContainer: {
-    marginTop: 20,
-  },
-  button: {
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  editButton: {
-    backgroundColor: '#A26BEB',
-  },
-  passwordButton: {
-    backgroundColor: '#ccc',
-  },
-  logoutButton: {
-    backgroundColor: '#F44336',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  bottomNavigation: {
+  tabContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: 'black',
+    marginBottom: 16,
+  },
+  tab: {
+    flex: 1,
     paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 4,
+    position: 'relative',
+  },
+  activeTab: {
+    backgroundColor: '#A259FF',
+  },
+  tabText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  activeTabText: {
+    color: '#FFFFFF',
+  },
+  badge: {
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    borderTopWidth: 1,
-    borderTopColor: '#333',
-  },
-  navItem: {
+    top: -5,
+    right: -5,
+    backgroundColor: '#FF0000',
+    borderRadius: 9,
+    width: 18,
+    height: 18,
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 5,
   },
-  navItemActive: {
+  badgeText: {
+    color: '#FFFFFF',
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  contentContainer: {
+    flex: 1,
+  },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    height: 80,
+    padding: 12,
+    marginBottom: 12,
     alignItems: 'center',
-    padding: 5,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
-  activeIconBackground: {
-    backgroundColor: '#A26BEB',
-    borderRadius: 25,
-    padding: 10,
-    marginBottom: 5,
+  petImage: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    marginRight: 12,
   },
-  navText: {
-    color: 'white',
+  cardInfo: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  petName: {
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  service: {
     fontSize: 12,
+    color: '#7A7A7A',
   },
-  navTextActive: {
-    color: 'white',
+  time: {
     fontSize: 12,
+    color: '#7A7A7A',
+  },
+  statusBadgeCard: {
+    borderRadius: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+  },
+  statusTextCard: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  statusAgendada: {
+    backgroundColor: '#A259FF',
+  },
+  statusAndamento: {
+    backgroundColor: '#FFC107', // Example color for In Progress
+  },
+  statusConcluída: {
+    backgroundColor: '#4CAF50', // Example color for Completed
+  },
+  scheduleButton: {
+    backgroundColor: '#A259FF',
+    height: 44,
+    width: '80%',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: 24,
+    marginBottom: 24, // Added for bottom spacing
+  },
+  scheduleButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
-export default VeterinarioScreen;
+export default ConsultasScreen;
