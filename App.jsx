@@ -5,11 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
-
 // Suas telas originais
 import HomeScreen from './src/screens/HomeScreen';
 import PetList from './src/screens/PetList';
-import AddPetScreen from './src/screens/AddPetScreen';
+import AddPetScreen from './src/screens/AgendamentoScreen';
 import PetsScreen from './src/screens/Petscreen';  // Tela de detalhes do pet
 import FavoritesScreen from './src/screens/FavoritesScreen';
 import ConsultasScreen from './src/screens/VeterinarioScreen';
@@ -197,3 +196,32 @@ export default function App() {
 }
 // App.jsx
 // Este arquivo configura a navegação principal do aplicativo, incluindo as abas e stacks necessárias.
+
+function VeterinarioStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: '#8D7EFB',
+        },
+        headerTintColor: '#FFFFFF',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerTitleAlign: 'center',
+      }}
+    >
+      <Stack.Screen
+        name="Consultas"
+        component={ConsultasScreen}
+        options={{ title: 'Consultas' }}
+      />
+      <Stack.Screen
+        name="DetalhesConsulta"
+        component={DetalhesConsultaScreen}
+        options={{ title: 'Detalhes da Consulta' }}
+      />
+    </Stack.Navigator>
+  );
+}

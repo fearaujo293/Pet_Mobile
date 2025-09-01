@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+ 
 const DetalhesConsultaScreen = () => {
   return (
     <View style={styles.container}>
@@ -16,13 +16,13 @@ const DetalhesConsultaScreen = () => {
         {/* Header */}
         <View style={styles.headerContainer}>
           <TouchableOpacity style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color="#A259FF" />
+            <Ionicons name="arrow-back" size={24} color="#A367F0" />
           </TouchableOpacity>
           <View style={styles.statusBadge}>
             <Text style={styles.statusText}>Agendada</Text>
           </View>
         </View>
-
+ 
         {/* Main Card */}
         <View style={styles.mainCard}>
           {/* Pet Info */}
@@ -33,7 +33,7 @@ const DetalhesConsultaScreen = () => {
             />
             <Text style={styles.petName}>Benjie</Text>
           </View>
-
+ 
           {/* Consultation Details */}
           <View style={styles.section}>
             <View style={styles.detailRow}>
@@ -43,7 +43,7 @@ const DetalhesConsultaScreen = () => {
               <Text style={styles.detailText}>Estômago</Text>
             </View>
           </View>
-
+ 
           {/* Symptom Description */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Descrição dos Sintomas</Text>
@@ -53,7 +53,7 @@ const DetalhesConsultaScreen = () => {
               </Text>
             </View>
           </View>
-
+ 
           {/* Required Implements */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Implementos Necessários</Text>
@@ -64,14 +64,14 @@ const DetalhesConsultaScreen = () => {
               <View style={[styles.tag, styles.tagRed]}><Text style={styles.tagTextRed}>Vermífugo</Text></View>
             </View>
           </View>
-
+ 
           {/* Observation */}
           <View style={styles.section}>
             <Text style={styles.observationText}>
               Dependendo do caso, recomendamos que você traga qualquer item adicional que considere levar.
             </Text>
           </View>
-
+ 
           {/* Location */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Localização</Text>
@@ -80,8 +80,8 @@ const DetalhesConsultaScreen = () => {
             </Text>
             <View style={styles.mapIconsContainer}>
               {/* Placeholder for map icons */}
-              <Image source={require('../assets/icone.png')} style={styles.mapIcon} />
-              <Image source={require('../assets/icone.png')} style={styles.mapIcon} />
+              <Image source={require('../assets/carrinho.png')} style={styles.mapIcon} />
+              <Image source={require('../assets/google_maps.png')} style={styles.mapIcon} />
             </View>
           </View>
         </View>
@@ -89,11 +89,11 @@ const DetalhesConsultaScreen = () => {
     </View>
   );
 };
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFBEA',
+    backgroundColor: '#8D7EFB',
   },
   scrollContent: {
     alignItems: 'center',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   statusBadge: {
-    backgroundColor: '#A259FF',
+    backgroundColor: '#A367F0',
     borderRadius: 12,
     paddingVertical: 6,
     paddingHorizontal: 12,
@@ -121,11 +121,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   mainCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#A367F0',
     borderRadius: 12,
     width: '90%',
     padding: 16,
-    shadowColor: '#000',
+    shadowColor: '#8D7EFB',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -147,41 +147,41 @@ const styles = StyleSheet.create({
   petName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#000000',
+    color: '#C79DFD',
   },
   section: {
     marginBottom: 12,
   },
   detailRow: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#C79DFD',
     borderRadius: 8,
     paddingHorizontal: 8,
     paddingVertical: 4,
     marginBottom: 4,
     alignSelf: 'flex-start',
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#A367F0',
   },
   detailText: {
     fontSize: 13,
-    color: '#000000',
+    color: '#C79DFD',
   },
   sectionTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#6C63FF',
+    color: '#C49DF6',
     marginBottom: 4,
   },
   descriptionBox: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#C79DFD',
     borderRadius: 8,
     padding: 12,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#C49DF6',
   },
   descriptionText: {
     fontSize: 13,
-    color: '#000000',
+    color: '#A367F0'
   },
   tagsContainer: {
     flexDirection: 'row',
@@ -196,37 +196,55 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   tagGreen: {
-    backgroundColor: '#E6F9F0',
+    backgroundColor: '#C79DFD',
   },
   tagTextGreen: {
-    color: '#028A43',
+    color: '#8D7EFB',
     fontSize: 12,
   },
   tagRed: {
-    backgroundColor: '#FDECEC',
+    backgroundColor: '#C49DF6',
   },
   tagTextRed: {
-    color: '#C62828',
+    color: '#C49DF6',
     fontSize: 12,
   },
   observationText: {
     fontSize: 12,
-    color: '#7A7A7A',
+    color: '#A367F0'
+  },
+  sectionTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#8D7EFB',
+    marginBottom: 4,
   },
   locationText: {
-    fontSize: 13,
-    color: '#000000',
-    marginBottom: 8,
+    fontSize: 16,
+    color: '#C79DFD',
+    lineHeight: 24,
+    width: '70%',
+    marginRight: 24,
   },
   mapIconsContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'flex-end',
+    width: '100%',
   },
   mapIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 12,
+    backgroundColor: '#EBE4F4',
+    marginLeft: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  iconImage: {
+    width: 24,
+    height: 24,
+  }
 });
-
+ 
 export default DetalhesConsultaScreen;
